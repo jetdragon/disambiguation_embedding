@@ -1,4 +1,4 @@
-import parser
+import parser_json
 import embedding
 import train_helper
 import sampler
@@ -12,7 +12,8 @@ def parse_args():
     """
     parser_arg = argparse.ArgumentParser(description =
                                          "run embedding for name disambiguation")
-    parser_arg.add_argument("file_path", help = 'input file name')
+    parser_arg.add_argument("file_path1", help = 'input file name1')
+    parser_arg.add_argument("file_path2", help = 'input file name2')
     parser_arg.add_argument("latent_dimen", type = int, default = 20,
                             help = 'number of dimension in embedding')
     parser_arg.add_argument("alpha", type = float, default = 0.02,
@@ -29,7 +30,9 @@ def main(args):
     """
     pipeline for representation learning for all papers for a given name reference
     """
-    dataset = parser.DataSet(args.file_path)
+    print args.file_path1
+    print args.file_path2
+    dataset = parser_json.DataSet(args.file_path1, args.file_path2)
     dataset.reader_arnetminer()
     bpr_optimizer = embedding.BprOptimizer(args.latent_dimen, args.alpha,
                                            args.matrix_reg)
