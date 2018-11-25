@@ -67,10 +67,12 @@ class DataSet():
                                         self.author_list.remove(ego_name2)
                                         self.paper_authorlist_dict[paper_index] = self.author_list
                                     else:
-                                        print 'can not find ego_name :', ego_name2
+                                        print 'can not find ego_name2 :', ego_name2
                                         print self.author_list
                                         self.paper_authorlist_dict[paper_index] = self.author_list
                                 else:
+                                    print 'can not find ego_name :', ego_name1, ego_name2
+                                    print self.author_list
                                     self.paper_authorlist_dict[paper_index] = self.author_list
 
                                 for co_author in self.author_list:
