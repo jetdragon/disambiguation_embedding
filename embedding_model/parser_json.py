@@ -34,10 +34,18 @@ class DataSet():
         print 'read file done.'    
 
         for key, value in df1.iteritems():
-            if key == 'bin_yu':
-                ego_name = key.title().replace('_', ' ')
+            if key == 'c_c_wang':
+                s1 = key.title().replace('_', ' ')
+                s2 = ''
+                for w in s1.split(' '):
+                    if len(w) == 1:
+                        w = w + '.'
+                        s2 = s2+w
+                    else:
+                        s2 = s2 + ' '+ w
                 # print type(value[0])
                 # print value[0][1]
+                ego_name = s2.strip()
                 for i in value[0].__iter__():
                     for key2, value2 in i.iteritems():
                         if key2 == 'authors':
@@ -83,7 +91,7 @@ class DataSet():
                                         label = df2[key][0].index(item)
                                         self.label_list.append(label)
 
-        print 'build list doen.'
+        print 'build list done.'
         print 'paper_author: ', self.paper_authorlist_dict
         print 'paper_list：', self.paper_list
         self.coauthor_list = list(coauthor_set)
