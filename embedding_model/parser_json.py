@@ -61,6 +61,15 @@ class DataSet():
                                 if ego_name in self.author_list:
                                     self.author_list.remove(ego_name)
                                     self.paper_authorlist_dict[paper_index] = self.author_list
+                                elif '.' in ego_name :
+                                    ego_name2 = ego_name.replace('.','.-',1)
+                                    if ego_name2 in self.author_list:
+                                        self.author_list.remove(ego_name2)
+                                        self.paper_authorlist_dict[paper_index] = self.author_list
+                                    else:
+                                        print 'can not find ego_name :', ego_name2
+                                        print self.author_list
+                                        self.paper_authorlist_dict[paper_index] = self.author_list
                                 else:
                                     self.paper_authorlist_dict[paper_index] = self.author_list
 
