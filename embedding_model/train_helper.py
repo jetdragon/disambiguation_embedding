@@ -9,6 +9,9 @@ class TrainHelper():
 
         bpr_optimizer.init_model(dataset)
         if sampler_method == "uniform":
+            print 'into uniform method'
+            print 'num_epoch: ', num_epoch
+            print 'dataset.num_nnz: ', dataset.num_nnz
             for _ in xrange(0, num_epoch):
                 bpr_loss = 0.0
                 for _ in xrange(0, dataset.num_nnz):
@@ -18,14 +21,17 @@ class TrainHelper():
                     update embedding in doc-doc network
                     """
                     for i, j, t in pp_sampler.generate_triplet_uniform(dataset):
+                        # print 'pp_sample'
                         bpr_optimizer.update_pp_gradient(i, j, t)
                         bpr_loss += bpr_optimizer.compute_pp_loss(i, j, t)
 
                     for i, j, t in pd_sampler.generate_triplet_uniform(dataset):
+                        # print 'pd_sample'
                         bpr_optimizer.update_pd_gradient(i, j, t)
                         bpr_loss += bpr_optimizer.compute_pd_loss(i, j, t)
 
                     for i, j, t in dd_sampler.generate_triplet_uniform(dataset):
+                        # print 'dd_sample'
                         bpr_optimizer.update_dd_gradient(i, j, t)
                         bpr_loss += bpr_optimizer.compute_dd_loss(i, j, t)
 

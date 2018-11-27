@@ -20,6 +20,7 @@ class CoauthorGraphSampler():
 
         while True:
             neig_list = dataset.C_Graph.neighbors(a_i)
+            # print 'in uniform loop'
             if a_t not in neig_list:
                 # given a_i, sample its neighbor based on its weight value
                 # idea of edge sampling
@@ -28,12 +29,14 @@ class CoauthorGraphSampler():
                 norm_weight_list = [float(w) / sum(weight_list)
                                     for w in weight_list]
                 a_j = np.random.choice(neig_list, 1, p=norm_weight_list)[0]
+                # print 'in uniform if'
                 yield a_i, a_j, a_t
                 break
 
             else:
                 a_i = random.choice(dataset.C_Graph.nodes())
                 a_t = random.choice(dataset.coauthor_list)
+                # print 'in uniform loop2'
 
     @staticmethod
     def generate_triplet_reject(dataset, bpr_optimizer):

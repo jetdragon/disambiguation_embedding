@@ -32,6 +32,8 @@ class Evaluator():
             else:
                 predict_label_dict[pred_lbl].append(idx)
 
+        print 'true label :', true_label_dict
+        print 'predict label :', predict_label_dict
         # compute cluster-level F1
         # let's denote C(r) as clustering result and T(k) as partition (ground-truth)
         # construct r * k contingency table for clustering purpose 
