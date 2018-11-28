@@ -37,9 +37,12 @@ class TrainHelper():
 
                 average_loss = float(bpr_loss) / dataset.num_nnz
                 print "average bpr loss is " + str(average_loss)
-                average_f1 = eval_f1.compute_f1(dataset, bpr_optimizer)
-                print 'f1 is ' + str(average_f1)
-                print
+                # average_f1 = eval_f1.compute_f1(dataset, bpr_optimizer)
+                # print 'f1 is ' + str(average_f1)
+                # print
+            average_f1 = eval_f1.compute_f1(dataset, bpr_optimizer,len(dataset.coauthor_list)/10,1,0.001)
+            print 'f1 is ' + str(average_f1)
+            print            
 
         elif sampler_method == "reject":
             for _ in xrange(0, num_epoch):

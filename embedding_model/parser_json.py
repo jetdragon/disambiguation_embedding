@@ -3,7 +3,8 @@ import networkx as nx
 
 class DataSet():
 
-    def __init__(self, user, user_data, df):
+    # def __init__(self, user, user_data, df):
+    def __init__(self, user, user_data):
 
         self.paper_authorlist_dict = {}
         self.paper_list = []
@@ -15,7 +16,8 @@ class DataSet():
         self.author_list = []
         self.user = user
         self.user_data = user_data
-        self.df2 = df
+        # self.df2 = df
+        self.paper_dict = {}
 
     def reader_arnetminer(self):
         paper_index = 0
@@ -70,18 +72,21 @@ class DataSet():
                         self.paper_authorlist_dict[paper_index] = []
 
                 if key2 == 'id':
-                    for item in self.df2[self.user][0].__iter__():
-                        for j in item.__iter__():
-                            if j == value2:
-                                # print type(df2[key][0])
-                                # print df2[key][0]
-                                # print j
-                                label = self.df2[self.user][0].index(item)
-                                self.label_list.append(label)
+                    # print 'id :', value2
+                    # print 'no. of authors :', len(self.author_list)
+                    self.paper_dict[paper_index] = value2
+                    # for item in self.df2[self.user][0].__iter__():
+                    #     for j in item.__iter__():
+                    #         if j == value2:
+                    #             # print type(df2[key][0])
+                    #             # print df2[key][0]
+                    #             # print j
+                    #             label = self.df2[self.user][0].index(item)
+                    #             self.label_list.append(label)
 
         print 'build list done.'
         # print 'author_list:', self.author_list
-        # print 'paper_list：', self.paper_list
+        print 'no. of paper ：', len(self.paper_list)
         # print 'paper_author: ', self.paper_authorlist_dict
         self.coauthor_list = list(coauthor_set)
         """
@@ -121,5 +126,7 @@ class DataSet():
                        self.C_Graph.number_of_edges() + \
                        bipartite_num_edge
         print 'user :', self.user
-        print 'no of edges :', self.num_nnz                       
+        print 'co_author_no. :', len(self.coauthor_list)
+        print 'no of edges :', self.num_nnz
+        # print 'paper dict :', self.paper_dict                       
         print 'build graph done'

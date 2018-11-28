@@ -16,7 +16,7 @@ def parse_args():
     parser_arg = argparse.ArgumentParser(description =
                                          "run embedding for name disambiguation")
     parser_arg.add_argument("file_path1", help = 'input file name1')
-    parser_arg.add_argument("file_path2", help = 'input file name2')
+    # parser_arg.add_argument("file_path2", help = 'input file name2')
     parser_arg.add_argument("latent_dimen", type = int, default = 20,
                             help = 'number of dimension in embedding')
     parser_arg.add_argument("alpha", type = float, default = 0.02,
@@ -40,17 +40,19 @@ def main(args):
         json_file1 = json.load(f1)
         df1 = json_normalize(json_file1)
 
-    with open(args.file_path2, 'r') as f2:
-        json_file2 = json.load(f2)
-        df2 = json_normalize(json_file2)
+    # with open(args.file_path2, 'r') as f2:
+    #     json_file2 = json.load(f2)
+    #     df2 = json_normalize(json_file2)
 
     # print 'read file done.' 
 
     for key, value in df1.iteritems():
-        if key == 'bin_yu':       
-            print 'begin process user (', key, ') ************'
-            dataset = parser_json.DataSet(key, value, df2)
-            dataset.reader_arnetminer()
+        # if key == 'hong_yan_wang':       
+        print 'begin process user (', key, ') ************'
+        # dataset = parser_json.DataSet(key, value, df2)
+        dataset = parser_json.DataSet(key, value)
+        dataset.reader_arnetminer()
+        if dataset.num_nnz < 1000000:
             bpr_optimizer = embedding.BprOptimizer(args.latent_dimen, args.alpha,
                                                 args.matrix_reg)
             pp_sampler = sampler.CoauthorGraphSampler()
